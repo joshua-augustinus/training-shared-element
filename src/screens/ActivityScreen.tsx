@@ -1,3 +1,4 @@
+import { ArticleHeader } from '@src/components/ArticleHeader';
 import React from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
@@ -5,40 +6,31 @@ import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
 
 
 type Props = {
-    navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
+    navigation: any
 }
 
 
-class ActivityScreen extends React.Component<Props> {
-    static navigationOptions = {
-        drawerLabel: () => null
-    }
+const ActivityScreen = (props: Props) => {
 
-    onMenuPress() {
-        console.log(this.props.navigation.state);// { key: 'Home', routeName: 'Home' }
-        console.log("Menu pressed");
-        this.props.navigation.dispatch(DrawerActions.toggleDrawer());
-    }
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ height: 50, backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}>
 
-    render() {
-        return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ height: 50, backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}>
+                <TouchableOpacity style={{ backgroundColor: 'yellow' }}>
+                    <Text>Menu</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1 }}>
+                <ArticleHeader />
 
-                    <TouchableOpacity style={{ backgroundColor: 'yellow' }}
-                        onPress={() => this.onMenuPress()}>
-                        <Text>Menu</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <TextInput placeholder="Enter text here..."></TextInput>
+            </View>
+        </SafeAreaView>
 
-                    <Text>{this.props.navigation.state.routeName}</Text>
-                    <TextInput placeholder="Enter text here..."></TextInput>
-                </View>
-            </SafeAreaView>
+    );
 
-        );
-    }
 }
 
 export { ActivityScreen }
+
+ActivityScreen.navigationOptions = {}

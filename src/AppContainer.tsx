@@ -7,14 +7,18 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 const StackNavigatorConfig = {
+    initialRouteName: 'Stack1',
     defaultNavigationOptions: ({ navigation }) => ({
-    })
+        cardStyle: {
+            backgroundColor: 'transparent'
+        }
+    }),
+
 }
 
 const InnerStack = createSharedElementStackNavigator({
-    Stack1:
-        MasterScreen,
-
+    Stack1: MasterScreen,
+    Activity: ActivityScreen
 
 },
     StackNavigatorConfig
@@ -29,9 +33,7 @@ const RootStack = createDrawerNavigator({
         // @ts-ignore
         screen: InnerStack
     },
-    Activity: {
-        screen: ActivityScreen
-    }
+
 }, {
     contentComponent: SideMenu,
     backBehavior: "initialRoute"

@@ -18,7 +18,7 @@ const MasterScreen = (props: Props) => {
     }, []);
 
     const onMenuPress = () => {
-        props.navigation.push("Stack1");
+        props.navigation.push("Activity");
     }
 
 
