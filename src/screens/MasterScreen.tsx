@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { Button, Text, TextInput, TouchableOpacity, View, BackHandler } from 'react-native';
 import { SafeAreaView, StackActions } from 'react-navigation';
 import { DrawerActions, NavigationDrawerProp } from 'react-navigation-drawer';
-import Icon from 'react-native-vector-icons/Entypo';
+import { ArticleHeader } from '@src/components/ArticleHeader';
 
 /**
  * https://reactnavigation.org/docs/4.x/typescript
  */
 type Props = {
-    navigation: NavigationDrawerProp<{ userId: string, routeName: string }>;
+    navigation: any
 }
 
 const MasterScreen = (props: Props) => {
@@ -18,20 +18,7 @@ const MasterScreen = (props: Props) => {
     }, []);
 
     const onMenuPress = () => {
-        console.log(props.navigation.state);// { key: 'Home', routeName: 'Home' }
-        console.log("Menu pressed");
-        props.navigation.dispatch(DrawerActions.toggleDrawer());
-    }
-
-    const onButtonPress = () => {
-        const pushAction = StackActions.push({
-            routeName: 'Stack1',
-            params: {
-                myUserId: 9,
-            },
-        });
-
-        props.navigation.dispatch(pushAction);
+        props.navigation.push("Stack1");
     }
 
 
@@ -45,10 +32,7 @@ const MasterScreen = (props: Props) => {
                 </TouchableOpacity>
             </View>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Icon name="controller-play" size={24} />
-                <Text>{props.navigation.state.routeName}</Text>
-                <TextInput placeholder="Enter text here..."></TextInput>
-                <Button title="Press me" onPress={() => onButtonPress()}></Button>
+                <ArticleHeader />
             </View>
         </SafeAreaView>
 
@@ -59,3 +43,7 @@ const MasterScreen = (props: Props) => {
 MasterScreen.navigationOptions = {}
 
 export { MasterScreen }
+
+MasterScreen.sharedElements = (navigation, otherNavigation, showing) => {
+    return [`image1`];
+};

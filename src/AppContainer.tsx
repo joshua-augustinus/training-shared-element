@@ -4,20 +4,29 @@ import { SideMenu } from './components/SideMenu';
 import { ActivityScreen } from './screens/ActivityScreen';
 import { MasterScreen } from './screens/MasterScreen';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+
+const StackNavigatorConfig = {
+    defaultNavigationOptions: ({ navigation }) => ({
+    })
+}
+
+const InnerStack = createSharedElementStackNavigator({
+    Stack1:
+        MasterScreen,
 
 
-
-const InnerStack = createStackNavigator({
-    Stack1: {
-        screen: MasterScreen
-    }
-})
+},
+    StackNavigatorConfig
+)
 
 const RootStack = createDrawerNavigator({
     Home: {
+        // @ts-ignore
         screen: InnerStack
     },
     SecondScreen: {
+        // @ts-ignore
         screen: InnerStack
     },
     Activity: {
